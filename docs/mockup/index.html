@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arvin Roeslim — Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cobalt:#2350F5; --cobalt-700:#1A3BC2; --sky:#A9D4FF; --tangerine:#FF7A2F; --sun:#FFD447;
+  --mint:#BFEFD8; --paper:#FFF8EC; --ink:#121433; --ink-soft:#474A6B; --white:#FFFFFF;
+  --display:"Archivo Black", system-ui, sans-serif; --text:"Plus Jakarta Sans", system-ui, sans-serif;
+  --pad:clamp(16px, 6.9vw, 100px); --max:1240px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:400 17px/1.55 var(--text);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:calc(var(--max) + 2*var(--pad));margin:0 auto;padding:0 var(--pad)}
+.label{font:700 13px/1.3 var(--text);letter-spacing:.08em;text-transform:uppercase}
+.display-xl{font:400 clamp(64px,10.3vw,148px)/.88 var(--display);text-transform:uppercase;letter-spacing:-.01em}
+.display-l{font:400 clamp(44px,6.7vw,96px)/.9 var(--display);text-transform:uppercase;letter-spacing:-.01em}
+.h-m{font:400 clamp(30px,3.4vw,48px)/1 var(--display);letter-spacing:-.005em}
+.h-s{font:800 clamp(22px,2vw,28px)/1.15 var(--text);letter-spacing:-.005em}
+.body-l{font:500 clamp(18px,1.5vw,21px)/1.5 var(--text)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:16px;height:56px;padding:0 8px 0 28px;border:2px solid var(--ink);border-radius:999px;
+  font:800 16px/1 var(--text);color:var(--ink);background:var(--paper);box-shadow:0 4px 0 var(--ink);transition:transform .09s, box-shadow .09s}
+.btn--primary{background:var(--tangerine)}
+.btn:hover .btn__icon{transform:rotate(-45deg)}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.btn__icon{display:grid;place-items:center;width:40px;height:40px;border-radius:999px;background:var(--ink);transition:transform .2s}
+.btn--sm{height:48px;padding-left:22px;gap:12px}.btn--sm .btn__icon{width:34px;height:34px}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+
+.chip{display:inline-flex;align-items:center;gap:10px;padding:7px 16px 7px 8px;border:2px solid var(--ink);border-radius:999px;background:var(--white);font:800 15px/1 var(--text)}
+.chip i{width:26px;height:26px;border-radius:999px;background:var(--sky)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+
+/* phone */
+.phone{width:280px;aspect-ratio:280/580;background:var(--ink);border-radius:44px;padding:12px;position:relative}
+.phone__screen{height:100%;border-radius:34px;background:var(--paper);display:grid;place-items:center;color:var(--ink-soft);overflow:hidden}
+.phone__screen img,.browser__screen img{width:100%;height:100%;object-fit:cover;object-position:top}
+.phone::after{content:"";position:absolute;top:22px;left:50%;width:84px;height:24px;margin-left:-42px;border-radius:12px;background:var(--ink)}
+.phone--android{border-radius:30px;padding:9px;background:#1B1D24}
+.phone--android .phone__screen{border-radius:22px}
+.phone--android::after{top:20px;width:12px;height:12px;margin-left:-6px;border-radius:99px;background:#0B0C10;box-shadow:0 0 0 2px #2A2D36}
+.phone--android::before{content:"";position:absolute;right:-4px;top:110px;width:4px;height:56px;border-radius:0 3px 3px 0;background:#1B1D24}
+.browser{width:100%;border:2px solid var(--ink);border-radius:14px;overflow:hidden;background:var(--white)}
+.browser__bar{display:flex;gap:7px;padding:12px 14px;background:var(--paper);border-bottom:2px solid var(--ink)}
+.browser__bar i{width:10px;height:10px;border-radius:99px;background:var(--ink)}
+.browser__screen{aspect-ratio:16/10;background:var(--sky);display:grid;place-items:center;color:var(--ink-soft);overflow:hidden}
+
+/* HERO */
+.hero{background:var(--cobalt);color:var(--paper);position:relative;overflow:hidden;padding-bottom:28px}
+.nav{display:flex;align-items:center;justify-content:space-between;padding-top:28px;position:relative;z-index:3}
+.nav__mark{font:400 28px/1 var(--display)}
+.nav__links{display:flex;gap:40px;font:800 16px/1 var(--text)}
+.nav__links a:hover{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px}
+.hero__grid{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:24px;min-height:760px;padding-top:24px;padding-bottom:72px}
+.hero__intro{display:flex;flex-direction:column;gap:28px;position:relative;z-index:2}
+.hero__intro .label{color:var(--sun)}
+.hero__intro p{max-width:560px}
+.ctas{display:flex;flex-wrap:wrap;gap:16px}
+.hero__art{position:relative;height:640px;align-self:end}
+.arch{position:absolute;right:0;bottom:-100px;width:420px;height:640px;background:var(--sky);border-radius:210px 210px 0 0;overflow:hidden}
+.portrait{position:absolute;left:50%;bottom:0;width:570px;height:auto;max-width:none;transform:translate(calc(-50% + var(--px,0px)),var(--py,0px)) rotate(var(--pr,0deg));transition:transform .25s ease-out;transform-origin:50% 100%}
+.hero__art .phone{position:absolute;right:70px;top:10px;transform:rotate(5deg)}
+.sticker{position:absolute;width:150px;height:150px;display:grid;place-items:center;text-align:center;color:var(--ink)}
+.sticker svg{position:absolute;inset:0}
+.sticker span{position:relative;font:800 15px/1.2 var(--text);letter-spacing:.06em;text-transform:uppercase}
+.hero .sticker{left:-10px;top:60px;transform:rotate(-10deg);z-index:3}
+.zigzag{position:absolute;left:0;right:0;bottom:0;height:28px;background:var(--paper);
+  -webkit-mask:conic-gradient(from 135deg at top,#000 90deg,#0000 0) 0 0/28px 28px repeat-x;mask:conic-gradient(from 135deg at top,#000 90deg,#0000 0) 0 0/28px 28px repeat-x;z-index:4}
+
+/* NOW */
+.now{display:grid;grid-template-columns:auto repeat(3,1fr);align-items:center;padding-top:40px;padding-bottom:40px}
+.now__tag{justify-self:start;margin-right:32px;padding:8px 14px;border:2px solid var(--ink);border-radius:999px;background:var(--sun);transform:rotate(-4deg)}
+.now__item{display:flex;flex-direction:column;gap:6px;padding:4px 24px;border-left:2px solid var(--ink);font:800 18px/1.3 var(--text)}
+.now__item .label{color:var(--ink-soft)}
+
+section{padding:96px 0}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;margin-bottom:48px}
+.sec-head .label{color:var(--ink-soft)}
+
+/* WORK */
+.work{padding-top:56px}
+.card{display:grid;grid-template-columns:440px 1fr;gap:64px;align-items:center;padding:48px;border-radius:28px;background:var(--mint)}
+.card__window{position:relative;height:540px;border-radius:220px 220px 28px 28px;background:var(--sky);overflow:hidden}
+.card__window .phone{position:absolute;left:80px;top:60px;transform:rotate(-4deg)}
+.card__window--pair .phone{width:220px}
+.card__window--pair .phone--android{left:28px;top:96px;transform:rotate(-6deg);z-index:1}
+.card__window--pair .phone:not(.phone--android){left:auto;right:28px;top:56px;transform:rotate(4deg);z-index:2}
+.card__body{display:flex;flex-direction:column;gap:20px;max-width:620px}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:12px;color:var(--ink-soft)}
+.tag{display:inline-block;padding:6px 12px;border:2px solid var(--ink);border-radius:999px;background:var(--sun);color:var(--ink);transform:rotate(-3deg)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:24px}
+.scard{display:flex;flex-direction:column;gap:14px;padding:24px 24px 28px;border-radius:28px;background:var(--sky);transition:transform .2s, box-shadow .2s}
+.scard:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--ink)}
+.scard--white{background:var(--white);border:2px solid var(--ink)}
+.scard--sun{background:var(--sun)}.scard--mint{background:var(--mint)}
+.scard__window{position:relative;height:280px;border-radius:174px 174px 16px 16px;background:var(--white);overflow:hidden}
+.scard--white .scard__window{background:var(--sky)}
+.scard__window .phone{position:absolute;left:50%;top:40px;width:174px;margin-left:-87px;border-radius:28px;padding:8px}
+.scard__window .phone .phone__screen{border-radius:21px}
+.scard__window .phone::after{top:14px;width:52px;height:15px;margin-left:-26px}
+.scard__window .phone--android{border-radius:22px;padding:6px}
+.scard__window .phone--android .phone__screen{border-radius:17px}
+.scard__window .phone--android::after{top:13px;width:9px;height:9px;margin-left:-4.5px}
+.scard__window .phone--android::before{top:70px;height:36px;right:-3px;width:3px}
+.scard__window--web{border-radius:16px;background:var(--cobalt);display:grid;place-items:center;padding:20px}
+.scard__window--web .browser{position:relative;width:100%;box-shadow:6px 6px 0 var(--ink)}
+.scard__window--web .browser__bar{padding:9px 12px;gap:6px}.scard__window--web .browser__bar i{width:8px;height:8px}
+.scard__window--web .browser__screen{aspect-ratio:757/415;background:var(--paper)}
+.scard .meta{font-size:12px}
+.scard h3{font:400 34px/1 var(--display)}
+.scard__part{color:var(--ink-soft)}
+.scard__part b{color:var(--ink);font-weight:800}
+.more{display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding:32px;border-radius:28px;background:var(--cobalt);color:var(--paper)}
+
+/* EXPERIENCE */
+.exp{background:var(--sky)}
+.row{display:grid;grid-template-columns:200px 1fr;gap:24px 64px;padding:32px 0;border-top:2px solid var(--ink)}
+.row .detail{display:flex;flex-direction:column;gap:12px}
+.row .org{color:var(--ink-soft)}
+.row ul{list-style:none;display:flex;flex-direction:column;gap:10px;max-width:820px}
+.row li{padding-left:28px;position:relative}
+.row li::before{content:"";position:absolute;left:0;top:.62em;width:14px;height:3px;background:var(--ink)}
+
+/* SKILLS */
+.skill-row{display:grid;grid-template-columns:120px 1fr;gap:16px 24px;align-items:center;padding:14px 0}
+.skill-row .label{color:var(--ink-soft)}
+.skills-note{max-width:720px;margin-top:24px;padding-left:144px;color:var(--ink-soft)}
+
+/* CERTS */
+.certs{padding-top:32px}
+.cert-row{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;padding:12px}
+.cert{display:flex;flex-direction:column;gap:14px;padding:16px 16px 20px;border:2px solid var(--ink);border-radius:16px;background:var(--white);box-shadow:6px 6px 0 var(--ink);transform:rotate(-2deg);transition:transform .2s}
+.cert:nth-child(2){transform:rotate(2deg)}
+.cert__img{width:100%;height:auto;border-radius:8px;border:2px solid var(--ink)}
+.cert__meta{display:flex;justify-content:space-between;gap:12px;margin-top:6px}
+.cert__verify{color:var(--cobalt-700);text-decoration:underline;text-underline-offset:3px}
+.cert:nth-child(3){transform:rotate(-1deg)}
+.cert-row .cert:hover{transform:rotate(0) translateY(-4px)}
+.cert .label{color:var(--ink-soft)}
+.cert .cert__verify{color:var(--cobalt-700)}
+
+/* CONTACT */
+.contact{background:var(--tangerine);padding-bottom:40px}
+.contact .body-l{margin:28px 0 40px}
+.links a{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px 0;border-top:2px solid var(--ink)}
+.links a span:last-child{font:400 clamp(22px,2.8vw,40px)/1 var(--display);overflow-wrap:anywhere;text-align:right}
+.links a:hover span:last-child{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+.contact .ctas{margin:40px 0 64px}
+.foot{display:flex;justify-content:center;padding-top:32px;border-top:2px solid var(--ink);font:700 15px/1 var(--text)}
+.foot span{display:inline-flex;align-items:center;gap:8px}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.34,1.4,.64,1),transform .6s cubic-bezier(.34,1.4,.64,1)}
+.reveal.in{opacity:1;transform:none}
+/* hero intro: plays once on load */
+@media (prefers-reduced-motion:no-preference){
+  .stamp{display:inline-block;animation:stamp .55s cubic-bezier(.34,1.4,.64,1) both .05s}
+  .stamp--2{animation-delay:.16s}
+  .hero__intro > .label,.hero__intro > p,.hero__intro .ctas{animation:rise .6s cubic-bezier(.34,1.4,.64,1) both}
+  .hero__intro > .label{animation-delay:0s}.hero__intro > p{animation-delay:.3s}.hero__intro .ctas{animation-delay:.4s}
+  .portrait{animation:avatar .8s cubic-bezier(.34,1.3,.64,1) both .25s}
+  .hero .sticker{animation:pop .5s cubic-bezier(.34,1.6,.64,1) both .7s}
+  .hero .sticker:hover > *{animation:wiggle .5s ease-in-out}
+}
+@keyframes stamp{from{opacity:0;scale:1.12}to{opacity:1;scale:1}}
+@keyframes rise{from{opacity:0;translate:0 20px}to{opacity:1;translate:0 0}}
+@keyframes avatar{from{opacity:0;translate:0 90px}to{opacity:1;translate:0 0}}
+@keyframes pop{0%{scale:0}70%{scale:1.12}100%{scale:1}}
+@keyframes wiggle{0%,100%{rotate:0deg}25%{rotate:-7deg}75%{rotate:7deg}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.reveal{opacity:1;transform:none}}
+
+/* responsive */
+@media (max-width:1100px){
+  .hero__grid{grid-template-columns:1fr;min-height:0;padding-bottom:0}
+  .hero__art{height:640px;margin-top:24px}
+  .now{grid-template-columns:repeat(3,1fr);row-gap:20px}.now__tag{grid-column:1/-1}
+  .now__item:first-of-type{padding-left:0;border-left:0}
+  .arch{left:50%;right:auto;margin-left:-190px;width:380px;bottom:-140px}
+  .hero__art .phone{right:auto;left:50%;margin-left:-140px}
+  .hero .sticker{left:auto;right:4%;top:-10px}
+  .card{grid-template-columns:1fr;gap:32px;padding:24px}
+  .card__window{height:420px}
+  .card__window .phone{left:50%;margin-left:-140px}
+  .card__window--pair .phone--android{left:calc(50% - 200px);margin-left:0}
+  .card__window--pair .phone:not(.phone--android){right:auto;left:calc(50% - 20px);margin-left:0}
+  .grid,.cert-row{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:720px){
+  .nav__links{display:none}
+  .grid,.cert-row{grid-template-columns:1fr}
+  .row,.skill-row{grid-template-columns:1fr}
+  .skills-note{padding-left:0}
+  .now{grid-template-columns:1fr}
+  .now__item{padding:16px 0 0;border-left:0;border-top:2px solid var(--ink);font-size:17px}
+  .now__item:first-of-type{padding-top:16px;border-top:2px solid var(--ink)}
+  section{padding:64px 0}
+  .hero .sticker{width:116px;height:116px;top:0;right:2%}.hero .sticker span{font-size:12px}
+  .hero__art{height:420px;margin-top:8px}
+  .arch{width:300px;height:500px;margin-left:-150px;bottom:-100px}
+  .portrait{width:440px}
+  .links a{flex-direction:column;align-items:flex-start}
+  .links a span:last-child{text-align:left;font-size:20px}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="star" viewBox="0 0 150 150"><polygon id="starpoly" fill="#FFD447" stroke="#121433" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="down" viewBox="0 0 24 24"><path d="M12 4v13M6 11l6 6 6-6M5 20h14" fill="none" stroke="#FFF8EC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="#FFF8EC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="arrow-ink" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="#121433" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="hero">
+  <div class="wrap">
+    <nav class="nav" aria-label="Main">
+      <a class="nav__mark" href="#">arvin.</a>
+      <div class="nav__links"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#contact">Contact</a></div>
+      <a class="btn btn--sm" href="#">CV <span class="btn__icon"><svg width="18" height="18"><use href="#down"/></svg></span></a>
+    </nav>
+    <div class="hero__grid">
+      <div class="hero__intro">
+        <span class="label">Mobile developer · Jakarta</span>
+        <h1 class="display-xl"><span class="stamp">Arvin</span><br><span class="stamp stamp--2">Roeslim</span></h1>
+        <p class="body-l">I build mobile apps with Flutter, Kotlin and Swift, and design them in Figma first.</p>
+        <div class="ctas">
+          <a class="btn btn--primary" href="#">Download CV <span class="btn__icon"><svg width="20" height="20"><use href="#down"/></svg></span></a>
+          <a class="btn" href="#work">See my work <span class="btn__icon"><svg width="20" height="20"><use href="#arrow"/></svg></span></a>
+        </div>
+      </div>
+      <div class="hero__art" aria-hidden="true">
+        <div class="arch"><img class="portrait" src="shots/arvin-3d.png" alt="Arvin Roeslim as a 3D animated character" width="1254" height="1254"></div>
+        <div class="sticker"><svg viewBox="0 0 150 150"><use href="#star"/></svg><span>Open<br>to work</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="zigzag"></div>
+</header>
+
+<main>
+  <div class="wrap now">
+    <span class="label now__tag">Now</span>
+    <div class="now__item"><span class="label">Work</span><span>Intern at PT Gading Murni</span></div>
+    <div class="now__item"><span class="label">Study</span><span>Mobile Application &amp; Technology, BINUS</span></div>
+    <div class="now__item"><span class="label">Looking for</span><span>Full-time mobile developer roles</span></div>
+  </div>
+
+  <section id="work" class="work">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2 class="display-l">Selected work</h2><span class="label">6 projects · 2024–2026</span></div>
+      <article class="card reveal">
+        <div class="card__window card__window--pair"><div class="phone phone--android"><div class="phone__screen"><img src="shots/evo-roadmap.png" alt="evo+ financial roadmap screen" loading="lazy"></div></div><div class="phone"><div class="phone__screen"><img src="shots/evo-splash.png" alt="evo+ splash screen with the Evo mascot" loading="lazy"></div></div></div>
+        <div class="card__body">
+          <div class="meta label">Thesis · Team project · 2026 <span class="tag">Coming soon</span></div>
+          <h3 class="h-m">evo+ (Money Manager)</h3>
+          <p>A money tracker for young Indonesians. Log spending, income and transfers across cash, bank and e-wallets, set budgets, and get a recap every month. Evo, the mascot, walks you through three steps: savings, an emergency fund, then investing.</p>
+          <span class="label">My part</span>
+          <p>Product concept, UI/UX design and the Evo mascot. Turned the Figma screens into Flutter and structured the app into UI, controller, service and API layers. Set up the server it runs on: Docker, CI/CD and Cloudflare Tunnel on my homelab.</p>
+          <div class="chips"><span class="chip"><i></i>Flutter</span><span class="chip"><i></i>Figma</span><span class="chip"><i></i>Docker</span></div>
+        </div>
+      </article>
+
+      <div class="grid">
+        <a class="scard reveal" href="https://github.com/BrandonLi03/Waste2Cash">
+          <div class="scard__window"><div class="phone phone--android"><div class="phone__screen"><img src="shots/waste-2-cash-screen.jpg" alt="Waste2Cash home screen" loading="lazy"></div></div></div>
+          <span class="meta label">Campus team project · 2025</span><h3>Waste2Cash</h3>
+          <p>Connects people selling recyclable waste with collectors nearby.</p>
+          <p class="scard__part"><b>My part:</b> the admin dashboard where collectors manage sellers and schedule pickups.</p>
+          <div class="chips"><span class="chip"><i></i>Kotlin</span></div>
+        </a>
+        <a class="scard scard--sun reveal" href="https://github.com/BrandonLi03/LaundryHub">
+          <div class="scard__window"><div class="phone phone--android"><div class="phone__screen"><img src="shots/laundry-hub-screen.jpg" alt="LaundryHub home screen with queue status" loading="lazy"></div></div></div>
+          <span class="meta label">Campus team project · 2025</span><h3>LaundryHub</h3>
+          <p>Check the laundry queue at Binus Square, book a slot and get a digital receipt.</p>
+          <p class="scard__part"><b>My part:</b> led the design in Figma and built the queue and booking features.</p>
+          <div class="chips"><span class="chip"><i></i>Kotlin</span><span class="chip"><i></i>Figma</span></div>
+        </a>
+        <a class="scard scard--white reveal" href="https://github.com/arvinr11/DoJo-Movie">
+          <div class="scard__window"><div class="phone phone--android"><div class="phone__screen"><img src="shots/dojo-movie-screen.jpg" alt="DoJo Movie home screen with map and films" loading="lazy"></div></div></div>
+          <span class="meta label">Campus team project · 2025</span><h3>DoJo Movie</h3>
+          <p>Browse and buy films, then find the nearest store on a map.</p>
+          <p class="scard__part"><b>My part:</b> the Home page, the Maps integration and caching movie data in SQLite.</p>
+          <div class="chips"><span class="chip"><i></i>Kotlin</span><span class="chip"><i></i>SQLite</span><span class="chip"><i></i>Maps API</span></div>
+        </a>
+        <a class="scard scard--mint reveal" href="https://github.com/Calvin-77/Video-Tape-Store">
+          <div class="scard__window"><div class="phone phone--android"><div class="phone__screen"><img src="shots/video-tape-store-screen.jpg" alt="Video Tape Store catalogue screen" loading="lazy"></div></div></div>
+          <span class="meta label">Campus team project · 2024</span><h3>Video Tape Store</h3>
+          <p>A shop for video tapes, with a customer side and an admin side.</p>
+          <p class="scard__part"><b>My part:</b> the store UI and the admin dashboard for the catalogue.</p>
+          <div class="chips"><span class="chip"><i></i>Flutter</span><span class="chip"><i></i>Node.js</span></div>
+        </a>
+        <a class="scard reveal" href="https://github.com/arvinr11/christian-wijaya">
+          <div class="scard__window scard__window--web"><div class="browser"><div class="browser__bar"><i></i><i></i><i></i></div><div class="browser__screen"><img src="shots/christian-wijaya-screen.jpg" alt="Christian Wijaya website hero" loading="lazy"></div></div></div>
+          <span class="meta label">Solo campus project · 2025</span><h3>Christian Wijaya</h3>
+          <p>A website for a luxury fashion brand and its sustainability story.</p>
+          <p class="scard__part"><b>My part:</b> everything, from the Figma design to responsive HTML, CSS and JavaScript.</p>
+          <div class="chips"><span class="chip"><i></i>HTML</span><span class="chip"><i></i>CSS</span><span class="chip"><i></i>JavaScript</span></div>
+        </a>
+        <a class="more reveal" href="https://github.com/arvinr11">
+          <span class="h-m">More code<br>on GitHub</span>
+          <span class="btn btn--sm" style="align-self:flex-start">github.com/arvinr11 <span class="btn__icon"><svg width="18" height="18"><use href="#arrow"/></svg></span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="exp">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2 class="display-l">Experience</h2></div>
+      <div class="row reveal">
+        <span class="label">Internship · Now</span>
+        <div class="detail">
+          <h3 class="h-s">Intern, PT Gading Murni</h3>
+          <span class="org">Jakarta branch · Office supplies, equipment and technology since 1948</span>
+          <ul class="body-l">
+            <li>Built the company profile website and the e-commerce website.</li>
+            <li>IT support for the office: Wi-Fi, printers and shared printing.</li>
+            <li>Now in the Project division, handling procurement for institutional clients.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="row reveal">
+        <span class="label">2023 — Now</span>
+        <div class="detail">
+          <h3 class="h-s">Mobile Application &amp; Technology student</h3>
+          <span class="org">BINUS University, Jakarta</span>
+          <ul class="body-l"><li>Thesis: evo+, a money tracker app that helps young Indonesians build their finances step by step, from savings to an emergency fund to investing.</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2 class="display-l">Skills</h2></div>
+      <div class="skill-row reveal"><span class="label">Mobile</span><div class="chips"><span class="chip"><i></i>Flutter</span><span class="chip"><i></i>Dart</span><span class="chip"><i></i>Kotlin</span><span class="chip"><i></i>Swift</span><span class="chip"><i></i>Firebase</span></div></div>
+      <div class="skill-row reveal"><span class="label">Design</span><div class="chips"><span class="chip"><i></i>Figma</span></div></div>
+      <div class="skill-row reveal"><span class="label">Web</span><div class="chips"><span class="chip"><i></i>HTML</span><span class="chip"><i></i>CSS</span><span class="chip"><i></i>JavaScript</span><span class="chip"><i></i>Node.js</span><span class="chip"><i></i>Astro</span></div></div>
+      <div class="skill-row reveal"><span class="label">Homelab</span><div class="chips"><span class="chip"><i></i>Docker</span><span class="chip"><i></i>Linux</span><span class="chip"><i></i>GitHub Actions</span><span class="chip"><i></i>Cloudflare Tunnel</span></div></div>
+      <p class="skills-note body-l reveal">Lately I run a small homelab at home. It hosts my side projects, this site included.</p>
+    </div>
+  </section>
+
+  <section class="certs">
+    <div class="wrap">
+      <div class="sec-head reveal"><h2 class="display-l">Certificates</h2><span class="label">3 · Dicoding</span></div>
+      <div class="cert-row reveal">
+        <figure class="cert"><img class="cert__img" src="certs/dicoding-159.jpg" alt="Dicoding certificate: Belajar Membuat Aplikasi Flutter untuk Pemula" loading="lazy" width="1262" height="892"><figcaption><div class="h-s">Belajar Membuat Aplikasi Flutter untuk Pemula</div><div class="cert__meta"><span class="label">Dicoding · Sep 2026</span><a class="label cert__verify" href="https://www.dicoding.com/certificates/2VX3VYVRQPYQ">Verify</a></div></figcaption></figure>
+        <figure class="cert"><img class="cert__img" src="certs/dicoding-191.jpg" alt="Dicoding certificate: Memulai Pemrograman dengan Dart" loading="lazy" width="1262" height="892"><figcaption><div class="h-s">Memulai Pemrograman dengan Dart</div><div class="cert__meta"><span class="label">Dicoding · Sep 2026</span><a class="label cert__verify" href="https://www.dicoding.com/certificates/JMZVLGKEQXN9">Verify</a></div></figcaption></figure>
+        <figure class="cert"><img class="cert__img" src="certs/dicoding-908.jpg" alt="Dicoding certificate: Belajar Dasar Pengembangan Aplikasi Mobile" loading="lazy" width="1262" height="892"><figcaption><div class="h-s">Belajar Dasar Pengembangan Aplikasi Mobile</div><div class="cert__meta"><span class="label">Dicoding · Sep 2026</span><a class="label cert__verify" href="https://www.dicoding.com/certificates/6RPNOD5N5X2M">Verify</a></div></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2 class="display-l reveal">Hiring a mobile<br>developer?</h2>
+      <p class="body-l reveal">I reply within a day. Email is fastest.</p>
+      <div class="links reveal">
+        <a href="mailto:roeslimarvin@gmail.com"><span class="label">Email</span><span>roeslimarvin@gmail.com</span></a>
+        <a href="https://www.linkedin.com/in/arvinroeslim"><span class="label">LinkedIn</span><span>linkedin.com/in/arvinroeslim</span></a>
+        <a href="https://github.com/arvinr11"><span class="label">GitHub</span><span>github.com/arvinr11</span></a>
+      </div>
+      <div class="ctas"><a class="btn" href="#">Download CV <span class="btn__icon"><svg width="20" height="20"><use href="#down"/></svg></span></a></div>
+      <footer class="foot"><span>Made with <svg class="heart" width="18" height="18" viewBox="0 0 24 24" aria-label="love"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.2 0 3.6 1.3 4.2 2.4h2c.6-1.1 2-2.4 4.2-2.4 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z" fill="#121433"/></svg> by Arvin · © 2026</span></footer>
+    </div>
+  </section>
+</main>
+
+<script>
+// 12-point star
+const pts=[];for(let i=0;i<24;i++){const r=i%2?60:74,a=Math.PI*i/12-Math.PI/2;pts.push((75+r*Math.cos(a)).toFixed(1)+","+(75+r*Math.sin(a)).toFixed(1))}
+document.getElementById("starpoly").setAttribute("points",pts.join(" "));
+// avatar follows the cursor a little
+const hero=document.querySelector(".hero"), pic=document.querySelector(".portrait");
+if(pic && matchMedia("(pointer:fine) and (prefers-reduced-motion:no-preference)").matches){
+  hero.addEventListener("pointermove",e=>{const r=hero.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    pic.style.setProperty("--px",(x*16).toFixed(1)+"px");pic.style.setProperty("--py",(y*8).toFixed(1)+"px");pic.style.setProperty("--pr",(x*3).toFixed(2)+"deg")});
+  hero.addEventListener("pointerleave",()=>{["--px","--py","--pr"].forEach(k=>pic.style.removeProperty(k))});
+}
+// reveal on scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{rootMargin:"0px 0px -10% 0px"});
+document.querySelectorAll(".reveal").forEach((el,i)=>{el.style.transitionDelay=(i%3)*70+"ms";io.observe(el)});
+</script>
+</body>
+</html>
