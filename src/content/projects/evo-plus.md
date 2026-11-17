@@ -1,5 +1,5 @@
 ---
-title: evo+ (Money Manager)
+title: evo+
 kind: Thesis · Team project
 year: 2026
 summary: "A money tracker for young Indonesians. Log spending, income and transfers across cash, bank and e-wallets, set budgets, and get a recap every month. Evo, the mascot, walks you through three steps: savings, an emergency fund, then investing."

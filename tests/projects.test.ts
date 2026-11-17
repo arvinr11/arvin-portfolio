@@ -19,7 +19,7 @@ describe('sortProjects', () => {
 describe('work section', () => {
   it('renders all six projects', () => {
     const html = readDist('index.html');
-    for (const t of ['evo+ (Money Manager)', 'Waste2Cash', 'LaundryHub', 'DoJo Movie', 'Video Tape Store', 'Christian Wijaya']) {
+    for (const t of ['evo+', 'Waste2Cash', 'LaundryHub', 'DoJo Movie', 'Video Tape Store', 'Christian Wijaya']) {
       expect(html).toContain(t);
     }
   });
