@@ -1,0 +1,62 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import PhoneFrame from './ui/PhoneFrame.astro';
+import Chip from './ui/Chip.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { data } = Astro.props.project;
+const [first, second] = data.screens;
+---
+
+<article class:list={['card', 'reveal', `card--${data.color}`]}>
+  <div class:list={['card__window', second && 'card__window--pair']}>
+    {
+      second ? (
+        <>
+          <PhoneFrame class="card__phone card__phone--back" model="android" src={first.src} alt={first.alt} width={220} />
+          <PhoneFrame class="card__phone card__phone--front" model="iphone" src={second.src} alt={second.alt} width={220} />
+        </>
+      ) : (
+        <PhoneFrame class="card__phone" model={data.platform === 'ios' ? 'iphone' : 'android'} src={first.src} alt={first.alt} />
+      )
+    }
+  </div>
+  <div class="card__body">
+    <div class="meta label">
+      {data.kind} · {data.year}
+      {data.status === 'coming-soon' && <span class="tag">Coming soon</span>}
+    </div>
+    <h3 class="h-m">{data.title}</h3>
+    <p>{data.summary}</p>
+    <span class="label">My part</span>
+    <p>{data.myPart}</p>
+    <div class="chips">{data.stack.map((s) => <Chip label={s} />)}</div>
+  </div>
+</article>
+
+<style>
+  .card { display: grid; grid-template-columns: 440px 1fr; gap: 64px; align-items: center; padding: 48px; border-radius: 28px; }
+  .card--mint { background: var(--mint); }
+  .card--sky { background: var(--sky); }
+  .card--sun { background: var(--sun); }
+  .card--white { background: var(--white); border: 2px solid var(--ink); }
+  .card__window { position: relative; height: 540px; overflow: hidden; border-radius: 220px 220px 28px 28px; background: var(--sky); }
+  .card__window :global(.card__phone) { position: absolute; left: 80px; top: 60px; transform: rotate(-4deg); }
+  .card__window--pair :global(.card__phone) { width: 220px; }
+  .card__window--pair :global(.card__phone--back) { left: 28px; top: 96px; z-index: 1; transform: rotate(-6deg); }
+  .card__window--pair :global(.card__phone--front) { left: auto; right: 28px; top: 56px; z-index: 2; transform: rotate(4deg); }
+  .card__body { display: flex; flex-direction: column; gap: 20px; max-width: 620px; }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; color: var(--ink-soft); }
+  .tag { display: inline-block; padding: 6px 12px; border: 2px solid var(--ink); border-radius: 999px; background: var(--sun); color: var(--ink); transform: rotate(-3deg); }
+
+  @media (max-width: 1100px) {
+    .card { grid-template-columns: 1fr; gap: 32px; padding: 24px; }
+    .card__window { height: 420px; }
+    .card__window :global(.card__phone) { left: 50%; margin-left: -140px; }
+    .card__window--pair :global(.card__phone--back) { left: calc(50% - 200px); margin-left: 0; }
+    .card__window--pair :global(.card__phone--front) { right: auto; left: calc(50% - 20px); margin-left: 0; }
+  }
+</style>

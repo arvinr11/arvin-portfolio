@@ -1,0 +1,57 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import PhoneFrame from './ui/PhoneFrame.astro';
+import BrowserFrame from './ui/BrowserFrame.astro';
+import Chip from './ui/Chip.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { data } = Astro.props.project;
+const [screen] = data.screens;
+const isWeb = data.platform === 'web';
+const Tag = data.github ? 'a' : 'div';
+---
+
+<Tag
+  class:list={['scard', 'reveal', `scard--${data.color}`]}
+  href={data.github}
+  target={data.github ? '_blank' : undefined}
+  rel={data.github ? 'noopener' : undefined}
+>
+  <div class:list={['scard__window', isWeb && 'scard__window--web']}>
+    {
+      isWeb ? (
+        <BrowserFrame src={screen.src} alt={screen.alt} />
+      ) : (
+        <PhoneFrame class="scard__phone" model={data.platform === 'ios' ? 'iphone' : 'android'} src={screen.src} alt={screen.alt} width={174} />
+      )
+    }
+  </div>
+  <span class="meta label">{data.kind} · {data.year}</span>
+  <h3>{data.title}</h3>
+  <p>{data.summary}</p>
+  <p class="scard__part"><b>My part:</b> {data.myPart}</p>
+  <div class="chips">{data.stack.map((s) => <Chip label={s} />)}</div>
+</Tag>
+
+<style>
+  .scard { display: flex; flex-direction: column; gap: 14px; padding: 24px 24px 28px; border-radius: 28px; transition: transform .2s, box-shadow .2s; }
+  .scard:hover { transform: translate(-3px, -3px); box-shadow: var(--shadow-hard); }
+  .scard--sky { background: var(--sky); }
+  .scard--sun { background: var(--sun); }
+  .scard--mint { background: var(--mint); }
+  .scard--white { background: var(--white); border: 2px solid var(--ink); }
+  .scard__window { position: relative; height: 280px; overflow: hidden; border-radius: 174px 174px 16px 16px; background: var(--white); }
+  .scard--white .scard__window { background: var(--sky); }
+  .scard__window :global(.scard__phone) { position: absolute; left: 50%; top: 40px; width: 174px; margin-left: -87px; border-radius: 22px; padding: 6px; }
+  .scard__window :global(.scard__phone .phone__screen) { border-radius: 17px; }
+  .scard__window :global(.scard__phone::after) { top: 13px; width: 9px; height: 9px; margin-left: -4.5px; }
+  .scard__window :global(.scard__phone::before) { top: 70px; height: 36px; right: -3px; width: 3px; }
+  .scard__window--web { display: grid; place-items: center; padding: 20px; border-radius: 16px; background: var(--cobalt); }
+  .meta { font-size: 12px; color: var(--ink-soft); }
+  h3 { font: 400 34px/1 var(--display); }
+  .scard__part { color: var(--ink-soft); }
+  .scard__part b { color: var(--ink); font-weight: 800; }
+</style>

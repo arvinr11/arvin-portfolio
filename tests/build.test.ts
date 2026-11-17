@@ -44,7 +44,7 @@ describe('hero', () => {
     const html = readDist('index.html');
     const h1s = html.match(/<h1[\s>][\s\S]*?<\/h1>/g) ?? [];
     expect(h1s).toHaveLength(1);
-    expect(h1s[0].replace(/<[^>]+>/g, ' ')).toMatch(/Arvin\s+Roeslim/);
+    expect(h1s[0]!.replace(/<[^>]+>/g, ' ')).toMatch(/Arvin\s+Roeslim/);
   });
   it('gates intro motion behind reduced motion', async () => {
     const { builtCss } = await import('./helpers');
