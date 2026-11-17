@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { readDist } from './helpers';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { readDist, DIST } from './helpers';
 
 describe('build', () => {
   it('builds an index page', () => {
@@ -176,5 +178,16 @@ describe('evo+ card on phones', () => {
     const widths = [...css.matchAll(/\.card__window--pair[^{}]*\.card__phone ?\{[^}]*?\bwidth: ?(\d+)px/g)].map((m) => Number(m[1]));
     expect(widths).toContain(220);
     expect(Math.min(...widths)).toBeLessThanOrEqual(160);
+  });
+});
+
+describe('link preview image', () => {
+  it('is rendered at 2x (2400x1260) so it stays sharp on retina screens', () => {
+    const png = readFileSync(join(DIST, 'og.png'));
+    expect(png.readUInt32BE(16)).toBe(2400);
+    expect(png.readUInt32BE(20)).toBe(1260);
+    const html = readDist('index.html');
+    expect(html).toContain('<meta property="og:image:width" content="2400"');
+    expect(html).toContain('<meta property="og:image:height" content="1260"');
   });
 });

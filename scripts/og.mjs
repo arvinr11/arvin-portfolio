@@ -1,4 +1,4 @@
-// Renders public/og.png (1200x630), the link preview image.
+// Renders public/og.png (2400x1260, a 2x 1200x630 layout), the link preview image.
 // Run after changing the avatar or the headline: `node scripts/og.mjs`.
 import { readFileSync, writeFileSync } from 'node:fs';
 import satori from 'satori';
@@ -39,5 +39,6 @@ const svg = await satori(tree, {
     { name: 'Jakarta', data: jakarta, weight: 800 },
   ],
 });
-writeFileSync(new URL('public/og.png', root), new Resvg(svg).render().asPng());
+// Rendered at 2x (2400x1260) so LinkedIn and WhatsApp previews stay sharp on retina screens.
+writeFileSync(new URL('public/og.png', root), new Resvg(svg, { fitTo: { mode: 'width', value: 2400 } }).render().asPng());
 console.log('wrote public/og.png');
