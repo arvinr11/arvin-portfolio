@@ -106,3 +106,29 @@ describe('remaining sections', () => {
     expect(text()).toMatch(/Made with\s+by Arvin · © 2026/);
   });
 });
+
+describe('seo', () => {
+  it('has person json-ld', () => {
+    const m = readDist('index.html').match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+    expect(m).not.toBeNull();
+    const data = JSON.parse(m![1]!);
+    expect(data['@type']).toBe('Person');
+    expect(data.name).toBe('Arvin Roeslim');
+    expect(data.jobTitle).toBe('Mobile Developer');
+    expect(data.sameAs).toContain('https://github.com/arvinr11');
+  });
+  it('has canonical and og tags', () => {
+    const html = readDist('index.html');
+    expect(html).toContain('<link rel="canonical" href="https://arvinroeslim.my.id/"');
+    expect(html).toMatch(/<meta property="og:image" content="https:\/\/arvinroeslim\.my\.id\/og\.png"/);
+    expect(html).toContain('name="twitter:card" content="summary_large_image"');
+  });
+  it('ships sitemap, robots, llms.txt, favicon and og image', async () => {
+    const { distExists } = await import('./helpers');
+    for (const f of ['sitemap-index.xml', 'robots.txt', 'llms.txt', 'favicon.svg', 'og.png']) expect(distExists(f)).toBe(true);
+    expect(readDist('robots.txt')).toContain('Sitemap: https://arvinroeslim.my.id/sitemap-index.xml');
+  });
+  it('has a 404 page', () => {
+    expect(readDist('404.html')).toContain('href="/"');
+  });
+});

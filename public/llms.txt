@@ -1,0 +1,22 @@
+# Arvin Roeslim
+
+> Mobile developer in Jakarta. Builds mobile apps with Flutter, Kotlin and Swift, and designs them in Figma first. Final-year Mobile Application & Technology student at BINUS University (2023 to now), open to full-time mobile developer roles.
+
+## Pages
+
+- [Portfolio](https://arvinroeslim.my.id/): projects, experience, skills, certificates and contact links
+- [CV (PDF)](https://arvinroeslim.my.id/cv/ArvinRoeslim-CV.pdf)
+
+## Selected projects
+
+- evo+ (Money Manager), 2026, thesis team project, coming soon: money tracker for young Indonesians. Arvin's part: product concept, UI/UX design, the Evo mascot, Flutter front end, server setup.
+- Waste2Cash, 2025, campus team project (Kotlin): admin dashboard for collectors.
+- LaundryHub, 2025, campus team project (Kotlin): led the Figma design, built queue and booking.
+- DoJo Movie, 2025, campus team project (Kotlin): Home page, Maps integration, SQLite caching.
+- Video Tape Store, 2024, campus team project (Flutter, Node.js): store UI and admin dashboard.
+- Christian Wijaya, 2025, solo campus project: fashion brand website, design and build.
+
+## Profiles
+
+- LinkedIn: https://www.linkedin.com/in/arvinroeslim
+- GitHub: https://github.com/arvinr11
