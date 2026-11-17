@@ -169,3 +169,12 @@ describe('tech icons', () => {
     expect(html).not.toMatch(/<svg class="chip__logo/);
   });
 });
+
+describe('evo+ card on phones', () => {
+  it('shrinks the two phones under 720px so both fit the window', async () => {
+    const css = (await import('./helpers')).builtCss().replace(/\s+/g, ' ');
+    const widths = [...css.matchAll(/\.card__window--pair[^{}]*\.card__phone ?\{[^}]*?\bwidth: ?(\d+)px/g)].map((m) => Number(m[1]));
+    expect(widths).toContain(220);
+    expect(Math.min(...widths)).toBeLessThanOrEqual(160);
+  });
+});

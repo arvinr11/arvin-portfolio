@@ -59,4 +59,15 @@ const [first, second] = data.screens;
     .card__window--pair :global(.card__phone--back) { left: calc(50% - 200px); margin-left: 0; }
     .card__window--pair :global(.card__phone--front) { right: auto; left: calc(50% - 20px); margin-left: 0; }
   }
+  @media (max-width: 720px) {
+    .card { padding: 20px; }
+    .card__window { height: 380px; }
+    .card__window--pair :global(.card__phone) { width: 140px; border-radius: 24px; padding: 6px; }
+    .card__window--pair :global(.card__phone .phone__screen) { border-radius: 19px; }
+    .card__window--pair :global(.card__phone::after) { top: 14px; width: 46px; height: 13px; margin-left: -23px; border-radius: 7px; }
+    .card__window--pair :global(.card__phone--back::after) { width: 8px; height: 8px; margin-left: -4px; }
+    .card__window--pair :global(.card__phone::before) { display: none; }
+    .card__window--pair :global(.card__phone--back) { left: calc(50% - 124px); top: 72px; }
+    .card__window--pair :global(.card__phone--front) { left: calc(50% - 12px); top: 44px; }
+  }
 </style>
