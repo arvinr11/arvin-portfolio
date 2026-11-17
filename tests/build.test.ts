@@ -25,3 +25,16 @@ describe('foundations', () => {
     expect(readDist('index.html')).toContain("classList.add('js')");
   });
 });
+
+describe('reveal on scroll', () => {
+  it('content is visible without js', async () => {
+    const { builtCss } = await import('./helpers');
+    const css = builtCss().replace(/\s+/g, ' ');
+    const hiding = [...css.matchAll(/([^{}]*\.reveal[^{}]*)\{[^}]*opacity: ?0(?![.\d])/g)].map((m) => m[1].trim());
+    expect(hiding.length).toBeGreaterThan(0);
+    for (const sel of hiding) expect(sel).toContain('.js');
+  });
+  it('ships the reveal script', () => {
+    expect(readDist('index.html')).toMatch(/IntersectionObserver|<script type="module" src="\/_astro\//);
+  });
+});

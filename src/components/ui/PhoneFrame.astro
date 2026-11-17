@@ -1,0 +1,48 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+  src?: ImageMetadata;
+  alt?: string;
+  model?: 'iphone' | 'android';
+  width?: number;
+  loading?: 'lazy' | 'eager';
+  class?: string;
+}
+
+const { src, alt = '', model = 'iphone', width = 280, loading = 'lazy', class: extra } = Astro.props;
+---
+
+<div class:list={['phone', `phone--${model}`, extra]}>
+  <div class="phone__screen">
+    {src && <Image src={src} alt={alt} width={width * 2} loading={loading} />}
+  </div>
+</div>
+
+<style>
+  .phone {
+    width: 280px; aspect-ratio: 280 / 580; position: relative;
+    background: var(--ink); border-radius: 44px; padding: 12px;
+  }
+  .phone__screen {
+    height: 100%; overflow: hidden;
+    border-radius: 34px; background: var(--paper);
+  }
+  .phone__screen :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .phone::after {
+    content: ""; position: absolute; top: 22px; left: 50%;
+    width: 84px; height: 24px; margin-left: -42px;
+    border-radius: 12px; background: var(--ink);
+  }
+  .phone--android { border-radius: 30px; padding: 9px; background: var(--android); }
+  .phone--android .phone__screen { border-radius: 22px; }
+  .phone--android::after {
+    top: 20px; width: 12px; height: 12px; margin-left: -6px;
+    border-radius: 99px; background: #0B0C10; box-shadow: 0 0 0 2px #2A2D36;
+  }
+  .phone--android::before {
+    content: ""; position: absolute; right: -4px; top: 110px;
+    width: 4px; height: 56px; border-radius: 0 3px 3px 0; background: var(--android);
+  }
+</style>

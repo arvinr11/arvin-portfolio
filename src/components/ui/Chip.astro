@@ -1,0 +1,37 @@
+---
+import { getIcon } from '../../lib/icons';
+
+interface Props {
+  label: string;
+  /** Simple Icons slug, e.g. "flutter". Without one, the chip shows a plain dot. */
+  icon?: string;
+}
+
+const { label, icon } = Astro.props;
+const logo = icon ? getIcon(icon) : undefined;
+---
+
+<span class="chip">
+  {
+    logo ? (
+      <svg class="chip__logo" viewBox="0 0 24 24" aria-hidden="true">
+        <path d={logo.path} fill={`#${logo.hex}`} />
+      </svg>
+    ) : (
+      <i class="chip__dot" aria-hidden="true" />
+    )
+  }
+  {label}
+</span>
+
+<style>
+  .chip {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 7px 16px 7px 8px;
+    border: 2px solid var(--ink); border-radius: 999px;
+    background: var(--white); color: var(--ink);
+    font: 800 15px/1 var(--text);
+  }
+  .chip__logo { width: 26px; height: 26px; padding: 4px; border-radius: 999px; background: var(--paper); }
+  .chip__dot { width: 26px; height: 26px; border-radius: 999px; background: var(--sky); }
+</style>

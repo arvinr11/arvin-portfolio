@@ -1,0 +1,56 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary';
+  size?: 'md' | 'sm';
+  icon?: 'download' | 'arrow';
+  download?: boolean;
+  external?: boolean;
+  class?: string;
+}
+
+const { href, variant = 'secondary', size = 'md', icon = 'arrow', download = false, external = false, class: extra } = Astro.props;
+const iconSize = size === 'sm' ? 18 : 20;
+---
+
+<a
+  class:list={['btn', `btn--${variant}`, `btn--${size}`, extra]}
+  href={href}
+  download={download ? '' : undefined}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener' : undefined}
+>
+  <slot />
+  <span class="btn__icon" aria-hidden="true">
+    <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none">
+      {
+        icon === 'download' ? (
+          <path d="M12 4v13M6 11l6 6 6-6M5 20h14" stroke="#FFF8EC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+        ) : (
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="#FFF8EC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+        )
+      }
+    </svg>
+  </span>
+</a>
+
+<style>
+  .btn {
+    display: inline-flex; align-items: center; gap: 16px;
+    height: 56px; padding: 0 8px 0 28px;
+    border: 2px solid var(--ink); border-radius: 999px;
+    font: 800 16px/1 var(--text); color: var(--ink);
+    background: var(--paper); box-shadow: var(--shadow-button);
+    transition: transform .09s, box-shadow .09s;
+  }
+  .btn--primary { background: var(--tangerine); }
+  .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+  .btn__icon {
+    display: grid; place-items: center;
+    width: 40px; height: 40px; border-radius: 999px;
+    background: var(--ink); transition: transform .2s;
+  }
+  .btn:hover .btn__icon { transform: rotate(-45deg); }
+  .btn--sm { height: 48px; padding-left: 22px; gap: 12px; }
+  .btn--sm .btn__icon { width: 34px; height: 34px; }
+</style>
