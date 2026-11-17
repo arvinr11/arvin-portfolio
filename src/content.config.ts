@@ -22,4 +22,16 @@ const projects = defineCollection({
     }),
 });
 
-export const collections = { projects };
+const certificates = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/certificates' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      issuer: z.string(),
+      date: z.coerce.date(),
+      verifyUrl: z.url(),
+      image: image(),
+    }),
+});
+
+export const collections = { projects, certificates };

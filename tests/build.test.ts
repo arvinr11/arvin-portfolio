@@ -63,3 +63,46 @@ describe('hero', () => {
     for (const t of ['Intern at PT Gading Murni', 'Mobile Application &amp; Technology, BINUS', 'Full-time mobile developer roles']) expect(html).toContain(t);
   });
 });
+
+describe('remaining sections', () => {
+  const html = () => readDist('index.html');
+  const text = () => html().replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ');
+
+  it('every cv link resolves to a file in dist', async () => {
+    const { distExists } = await import('./helpers');
+    const links = [...html().matchAll(/href="(\/cv\/[^"]+)"/g)].map((m) => m[1]!);
+    expect(links.length).toBeGreaterThanOrEqual(3);
+    for (const l of links) expect(distExists(l.slice(1))).toBe(true);
+  });
+  it('every image has alt text', () => {
+    const imgs = html().match(/<img\b[^>]*>/g) ?? [];
+    expect(imgs.length).toBeGreaterThan(5);
+    for (const img of imgs) {
+      // Astro prints an empty alt as a bare `alt`; only the decorative hero avatar may use it.
+      const isDecorative = /\balt(="")?[\s>]/.test(img) && /class="[^"]*portrait/.test(img);
+      if (!isDecorative) expect(img).toMatch(/alt="[^"]+"/);
+    }
+  });
+  it('emits optimised project screenshots', () => {
+    const srcs = [...html().matchAll(/<img\b[^>]*src="([^"]+)"/g)].map((m) => m[1]!);
+    expect(srcs.some((s) => s.endsWith('.webp'))).toBe(true);
+    expect(srcs.filter((s) => /screen|roadmap|splash/.test(s) && s.endsWith('.png'))).toEqual([]);
+  });
+  it('uses none of the banned words', () => {
+    for (const w of ['passionate', 'seamless', 'crafting', 'pixel-perfect', 'elevate', 'unlock', 'leverage']) {
+      expect(text().toLowerCase()).not.toContain(w);
+    }
+  });
+  it('keeps the gading murni entry curated', () => {
+    expect(text()).toContain('Built the company profile website and the e-commerce website.');
+    expect(text()).toContain('IT support for the office: Wi-Fi, printers and shared printing.');
+    expect(text()).toContain('Now in the Project division, handling procurement for institutional clients.');
+    expect(text()).not.toMatch(/Samsung|Bank Indonesia|\bBI\b/);
+  });
+  it('lists three dicoding certificates with verify links', () => {
+    expect((html().match(/dicoding\.com\/certificates\//g) ?? []).length).toBe(3);
+  });
+  it('has the footer credit', () => {
+    expect(text()).toMatch(/Made with\s+by Arvin · © 2026/);
+  });
+});

@@ -1,0 +1,35 @@
+---
+import Chip from '../ui/Chip.astro';
+
+const groups: [string, string[]][] = [
+  ['Mobile', ['Flutter', 'Dart', 'Kotlin', 'Swift', 'Firebase']],
+  ['Design', ['Figma']],
+  ['Web', ['HTML', 'CSS', 'JavaScript', 'Node.js', 'Astro']],
+  ['Homelab', ['Docker', 'Linux', 'GitHub Actions', 'Cloudflare Tunnel']],
+];
+---
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2 class="display-l">Skills</h2></div>
+    {
+      groups.map(([name, items]) => (
+        <div class="skill-row reveal">
+          <span class="label">{name}</span>
+          <div class="chips">{items.map((s) => <Chip label={s} />)}</div>
+        </div>
+      ))
+    }
+    <p class="note body-l reveal">Lately I run a small homelab at home. It hosts my side projects, this site included.</p>
+  </div>
+</section>
+
+<style>
+  .skill-row { display: grid; grid-template-columns: 120px 1fr; gap: 16px 24px; align-items: center; padding: 14px 0; }
+  .skill-row .label { color: var(--ink-soft); }
+  .note { max-width: 720px; margin-top: 24px; padding-left: 144px; color: var(--ink-soft); }
+  @media (max-width: 720px) {
+    .skill-row { grid-template-columns: 1fr; }
+    .note { padding-left: 0; }
+  }
+</style>

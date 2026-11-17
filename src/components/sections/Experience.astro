@@ -1,0 +1,53 @@
+---
+const rows = [
+  {
+    when: 'Internship · Now',
+    role: 'Intern, PT Gading Murni',
+    org: 'Jakarta branch · Office supplies, equipment and technology since 1948',
+    points: [
+      'Built the company profile website and the e-commerce website.',
+      'IT support for the office: Wi-Fi, printers and shared printing.',
+      'Now in the Project division, handling procurement for institutional clients.',
+    ],
+  },
+  {
+    when: '2023 — Now',
+    role: 'Mobile Application & Technology student',
+    org: 'BINUS University, Jakarta',
+    points: [
+      'Thesis: evo+, a money tracker app that helps young Indonesians build their finances step by step, from savings to an emergency fund to investing.',
+    ],
+  },
+];
+---
+
+<section id="experience" class="exp">
+  <div class="wrap">
+    <div class="sec-head reveal"><h2 class="display-l">Experience</h2></div>
+    {
+      rows.map((r) => (
+        <div class="row reveal">
+          <span class="label">{r.when}</span>
+          <div class="detail">
+            <h3 class="h-s">{r.role}</h3>
+            <span class="org">{r.org}</span>
+            <ul class="body-l">
+              {r.points.map((p) => <li>{p}</li>)}
+            </ul>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .exp { background: var(--sky); }
+  .row { display: grid; grid-template-columns: 200px 1fr; gap: 24px 64px; padding: 32px 0; border-top: 2px solid var(--ink); }
+  .detail { display: flex; flex-direction: column; gap: 12px; }
+  .org { color: var(--ink-soft); }
+  ul { display: flex; flex-direction: column; gap: 10px; max-width: 820px; }
+  li { position: relative; padding-left: 28px; }
+  li::before { content: ""; position: absolute; left: 0; top: .62em; width: 14px; height: 3px; background: var(--ink); }
+  @media (max-width: 720px) { .row { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+
+const certs = (await getCollection('certificates')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const month = (d: Date) => d.toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+const issuers = [...new Set(certs.map((c) => c.data.issuer))].join(', ');
+---
+
+<section class="certs">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2 class="display-l">Certificates</h2>
+      <span class="label">{certs.length} · {issuers}</span>
+    </div>
+    <div class="cert-row reveal">
+      {
+        certs.map((c) => (
+          <figure class="cert">
+            <Image class="cert__img" src={c.data.image} alt={`${c.data.issuer} certificate: ${c.data.title}`} width={720} loading="lazy" />
+            <figcaption>
+              <div class="h-s">{c.data.title}</div>
+              <div class="cert__meta">
+                <span class="label">{c.data.issuer} · {month(c.data.date)}</span>
+                <a class="label cert__verify" href={c.data.verifyUrl} target="_blank" rel="noopener">Verify</a>
+              </div>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .certs { padding-top: 32px; }
+  .cert-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; padding: 12px; }
+  .cert {
+    display: flex; flex-direction: column; gap: 14px; padding: 16px 16px 20px;
+    border: 2px solid var(--ink); border-radius: 16px; background: var(--white);
+    box-shadow: var(--shadow-hard); transform: rotate(-2deg); transition: transform .2s;
+  }
+  .cert:nth-child(2) { transform: rotate(2deg); }
+  .cert:nth-child(3) { transform: rotate(-1deg); }
+  .cert-row .cert:hover { transform: rotate(0) translateY(-4px); }
+  .cert :global(.cert__img) { width: 100%; height: auto; border: 2px solid var(--ink); border-radius: 8px; }
+  .cert__meta { display: flex; justify-content: space-between; gap: 12px; margin-top: 6px; }
+  .cert__meta .label { color: var(--ink-soft); }
+  .cert__meta .cert__verify { color: var(--cobalt-700); text-decoration: underline; text-underline-offset: 3px; }
+  @media (max-width: 1100px) { .cert-row { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 720px) { .cert-row { grid-template-columns: 1fr; } }
+</style>
