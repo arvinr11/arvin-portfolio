@@ -1,0 +1,25 @@
+name: Deploy
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, arvin-portfolio]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build docker image
+        run: docker build -t arvin-portfolio:${{ github.ref_name }} .
+
+      - name: Create .env
+        run: echo "APP_VERSION=${{ github.ref_name }}" > .env
+
+      - name: Deploy
+        run: docker compose -p arvin-portfolio up -d --no-build --remove-orphans
+
+      - name: Remove old images
+        run: docker image prune -af --filter "label=app=arvin-portfolio" --filter "until=24h"
