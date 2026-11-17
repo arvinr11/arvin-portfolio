@@ -4,7 +4,7 @@ import Button from '../components/ui/Button.astro';
 ---
 
 <Base title="Page not found · Arvin Roeslim" description="This page doesn't exist.">
-  <main class="lost">
+  <main class="lost on-dark">
     <div class="wrap lost__inner">
       <span class="label">404</span>
       <h1 class="display-l">This page<br />doesn't exist</h1>
@@ -17,5 +17,5 @@ import Button from '../components/ui/Button.astro';
 <style>
   .lost { min-height: 100vh; display: grid; align-items: center; background: var(--cobalt); color: var(--paper); }
   .lost__inner { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; padding-top: 64px; padding-bottom: 64px; }
-  .label { color: var(--sun); }
+  .label { color: var(--sun-text); }
 </style>

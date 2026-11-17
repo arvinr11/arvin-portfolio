@@ -53,7 +53,12 @@ const person = {
     <meta name="twitter:image" content={og.href} />
 
     <script type="application/ld+json" set:html={JSON.stringify(person)} />
-    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script is:inline>
+      // Hide-then-reveal only runs with JS. If the reveal script never loads
+      // (blocked, offline, CSP), drop the class so every section stays visible.
+      document.documentElement.classList.add('js');
+      setTimeout(function () { if (!window.__revealReady) document.documentElement.classList.remove('js'); }, 3000);
+    </script>
     <slot name="head" />
   </head>
   <body>

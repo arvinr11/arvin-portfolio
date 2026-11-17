@@ -132,3 +132,30 @@ describe('seo', () => {
     expect(readDist('404.html')).toContain('href="/"');
   });
 });
+
+describe('final review fixes', () => {
+  const css = async () => (await import('./helpers')).builtCss().replace(/\s+/g, ' ').toLowerCase();
+  const text = () => readDist('index.html').replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ');
+
+  it('section headings fit a 360px phone (display-l minimum <= 36px)', async () => {
+    const m = (await css()).match(/\.display-l ?\{[^}]*clamp\((\d+)px/);
+    expect(m).not.toBeNull();
+    expect(Number(m![1])).toBeLessThanOrEqual(36);
+  });
+  it('drops the js class if the reveal script never runs', () => {
+    const html = readDist('index.html');
+    expect(html).toMatch(/__revealReady/);
+    expect(html).toMatch(/classList\.remove\(['"]js['"]\)/);
+  });
+  it('uses a visible ink focus ring by default', async () => {
+    expect(await css()).toMatch(/:focus-visible ?\{ ?outline: ?3px solid var\(--ink\)/);
+  });
+  it('uses the lighter sun for small text on cobalt', async () => {
+    const c = await css();
+    expect(c).toContain('#ffe58a');
+    expect(c).not.toMatch(/\.label[^{]*\{ ?color: ?var\(--sun\)/);
+  });
+  it('has no em dashes in visible copy', () => {
+    expect(text()).not.toContain('—');
+  });
+});

@@ -1,5 +1,6 @@
 // Fades sections in as they scroll into view. Content is only hidden when the
 // root has the `js` class (set inline in <head>), so it stays visible without JS.
+(window as Window & { __revealReady?: boolean }).__revealReady = true;
 const items = document.querySelectorAll<HTMLElement>('.reveal');
 
 if ('IntersectionObserver' in window) {

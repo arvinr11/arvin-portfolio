@@ -4,6 +4,7 @@
   --sky: #A9D4FF;
   --tangerine: #FF7A2F;
   --sun: #FFD447;
+  --sun-text: #FFE58A; /* sun for small text on cobalt: 4.7:1 */
   --mint: #BFEFD8;
   --paper: #FFF8EC;
   --ink: #121433;
@@ -32,12 +33,13 @@ body {
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; height: auto; }
 ul, ol { list-style: none; }
-:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+.on-dark :focus-visible { outline-color: var(--sun); }
 
 .wrap { max-width: calc(var(--max) + 2 * var(--pad)); margin: 0 auto; padding: 0 var(--pad); }
 .label { font: 700 13px/1.3 var(--text); letter-spacing: .08em; text-transform: uppercase; }
 .display-xl { font: 400 clamp(64px, 10.3vw, 148px)/.88 var(--display); text-transform: uppercase; letter-spacing: -.01em; }
-.display-l { font: 400 clamp(44px, 6.7vw, 96px)/.9 var(--display); text-transform: uppercase; letter-spacing: -.01em; }
+.display-l { font: 400 clamp(34px, 6.7vw, 96px)/.9 var(--display); text-transform: uppercase; letter-spacing: -.01em; }
 .h-m { font: 400 clamp(30px, 3.4vw, 48px)/1 var(--display); letter-spacing: -.005em; }
 .h-s { font: 800 clamp(22px, 2vw, 28px)/1.15 var(--text); letter-spacing: -.005em; }
 .body-l { font: 500 clamp(18px, 1.5vw, 21px)/1.5 var(--text); }
