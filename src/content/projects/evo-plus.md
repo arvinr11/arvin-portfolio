@@ -3,7 +3,7 @@ title: evo+
 kind: Thesis · Team project
 year: 2026
 summary: "A money tracker for young Indonesians. Log spending, income and transfers across cash, bank and e-wallets, set budgets, and get a recap every month. Evo, the mascot, walks you through three steps: savings, an emergency fund, then investing."
-myPart: "Product concept, UI/UX design and the Evo mascot. Turned the Figma screens into Flutter and structured the app into UI, controller, service and API layers. Set up the server it runs on: Docker, CI/CD and Cloudflare Tunnel on my homelab."
+myPart: "Product concept, UI/UX design and the Evo mascot. Built the Flutter front end from the Figma designs with an MVC structure, and set up the server it runs on."
 stack: [Flutter, Figma, Docker]
 platform: both
 screens:

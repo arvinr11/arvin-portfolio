@@ -9,7 +9,7 @@
 
 ## Selected projects
 
-- evo+, 2026, thesis team project, coming soon: money tracker for young Indonesians. Arvin's part: product concept, UI/UX design, the Evo mascot, Flutter front end, server setup.
+- evo+, 2026, thesis team project, coming soon: money tracker for young Indonesians. Arvin's part: product concept, UI/UX design, the Evo mascot, Flutter front end (MVC), server setup.
 - Waste2Cash, 2025, campus team project (Kotlin): admin dashboard for collectors.
 - LaundryHub, 2025, campus team project (Kotlin): led the Figma design, built queue and booking.
 - DoJo Movie, 2025, campus team project (Kotlin): Home page, Maps integration, SQLite caching.
