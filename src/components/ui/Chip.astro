@@ -1,23 +1,18 @@
 ---
-import { getIcon, slugForLabel } from '../../lib/icons';
+import { logoForLabel } from '../../lib/icons';
 
 interface Props {
   label: string;
-  /** Simple Icons slug, e.g. "flutter". Without one, the chip shows a plain dot. */
-  icon?: string;
 }
 
-const { label, icon } = Astro.props;
-const slug = icon ?? slugForLabel(label);
-const logo = slug ? getIcon(slug) : undefined;
+const { label } = Astro.props;
+const logo = logoForLabel(label);
 ---
 
 <span class="chip">
   {
     logo ? (
-      <svg class="chip__logo" viewBox="0 0 24 24" aria-hidden="true">
-        <path d={logo.path} fill={`#${logo.hex}`} />
-      </svg>
+      <img class="chip__logo" src={logo} alt="" width="20" height="20" loading="lazy" decoding="async" />
     ) : (
       <i class="chip__dot" aria-hidden="true" />
     )
@@ -28,11 +23,14 @@ const logo = slug ? getIcon(slug) : undefined;
 <style>
   .chip {
     display: inline-flex; align-items: center; gap: 10px;
-    padding: 7px 16px 7px 8px;
+    padding: 6px 16px 6px 6px;
     border: 2px solid var(--ink); border-radius: 999px;
     background: var(--white); color: var(--ink);
     font: 800 15px/1 var(--text);
   }
-  .chip__logo { width: 26px; height: 26px; padding: 4px; border-radius: 999px; background: var(--paper); }
-  .chip__dot { width: 26px; height: 26px; border-radius: 999px; background: var(--sky); }
+  .chip__logo {
+    width: 30px; height: 30px; padding: 5px;
+    border-radius: 999px; background: var(--paper); object-fit: contain;
+  }
+  .chip__dot { width: 30px; height: 30px; border-radius: 999px; background: var(--sky); }
 </style>

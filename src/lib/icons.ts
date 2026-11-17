@@ -1,26 +1,21 @@
-import * as simpleIcons from 'simple-icons';
+// Tech logos from techicons.dev (sourced from devicons/devicon, MIT), saved as
+// SVG files in src/assets/tech so the site never hotlinks them.
+const files = import.meta.glob<{ src: string }>('../assets/tech/*.svg', { eager: true, import: 'default' });
 
-type SimpleIcon = { slug: string; title: string; hex: string; path: string };
-
-const bySlug = new Map<string, SimpleIcon>(
-  Object.values(simpleIcons as Record<string, unknown>)
-    .filter((v): v is SimpleIcon => typeof v === 'object' && v !== null && 'slug' in v && 'path' in v)
-    .map((icon) => [icon.slug, icon]),
+const byName = new Map(
+  Object.entries(files).map(([path, mod]) => [path.split('/').pop()!.replace('.svg', ''), mod.src]),
 );
 
-/** Look up a Simple Icons logo by slug (e.g. "flutter"). Returns undefined for unknown slugs. */
-export function getIcon(slug: string): SimpleIcon | undefined {
-  return bySlug.get(slug);
-}
-
-/** Simple Icons slug for each tech label used on the site. */
-const LABEL_SLUGS: Record<string, string> = {
+/** File name (without .svg) in src/assets/tech for each tech label used on the site. */
+const LABEL_FILES: Record<string, string> = {
   Flutter: 'flutter', Dart: 'dart', Kotlin: 'kotlin', Swift: 'swift', Firebase: 'firebase',
-  Figma: 'figma', HTML: 'html5', CSS: 'css', JavaScript: 'javascript', 'Node.js': 'nodedotjs',
-  Astro: 'astro', Docker: 'docker', Linux: 'linux', 'GitHub Actions': 'githubactions',
-  'Cloudflare Tunnel': 'cloudflare', SQLite: 'sqlite', 'Maps API': 'googlemaps',
+  Figma: 'figma', HTML: 'html5', CSS: 'css3', JavaScript: 'javascript', 'Node.js': 'nodejs',
+  Astro: 'astro', Docker: 'docker', Linux: 'linux', 'GitHub Actions': 'github-actions',
+  'Cloudflare Tunnel': 'cloudflare', SQLite: 'sqlite', 'Maps API': 'google',
 };
 
-export function slugForLabel(label: string): string | undefined {
-  return LABEL_SLUGS[label];
+/** URL of the logo for a tech label, or undefined when there is none. */
+export function logoForLabel(label: string): string | undefined {
+  const file = LABEL_FILES[label];
+  return file ? byName.get(file) : undefined;
 }

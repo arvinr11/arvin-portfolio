@@ -79,7 +79,7 @@ describe('remaining sections', () => {
     expect(imgs.length).toBeGreaterThan(5);
     for (const img of imgs) {
       // Astro prints an empty alt as a bare `alt`; only the decorative hero avatar may use it.
-      const isDecorative = /\balt(="")?[\s>]/.test(img) && /class="[^"]*portrait/.test(img);
+      const isDecorative = /\balt(="")?[\s>]/.test(img) && /class="[^"]*(portrait|chip__logo)/.test(img);
       if (!isDecorative) expect(img).toMatch(/alt="[^"]+"/);
     }
   });
@@ -157,5 +157,15 @@ describe('final review fixes', () => {
   });
   it('has no em dashes in visible copy', () => {
     expect(text()).not.toContain('—');
+  });
+});
+
+describe('tech icons', () => {
+  it('skill chips use the techicons.dev svgs', () => {
+    const html = readDist('index.html');
+    const logos = html.match(/<img\b[^>]*chip__logo[^>]*>/g) ?? [];
+    expect(logos.length).toBeGreaterThanOrEqual(15);
+    for (const l of logos) expect(l).toMatch(/src="[^"]+\.svg"/);
+    expect(html).not.toMatch(/<svg class="chip__logo/);
   });
 });
