@@ -38,3 +38,28 @@ describe('reveal on scroll', () => {
     expect(readDist('index.html')).toMatch(/IntersectionObserver|<script type="module" src="\/_astro\//);
   });
 });
+
+describe('hero', () => {
+  it('has a single h1 with the name', () => {
+    const html = readDist('index.html');
+    const h1s = html.match(/<h1[\s>][\s\S]*?<\/h1>/g) ?? [];
+    expect(h1s).toHaveLength(1);
+    expect(h1s[0].replace(/<[^>]+>/g, ' ')).toMatch(/Arvin\s+Roeslim/);
+  });
+  it('gates intro motion behind reduced motion', async () => {
+    const { builtCss } = await import('./helpers');
+    const css = builtCss().replace(/\s+/g, ' ');
+    expect(css).toMatch(/@keyframes stamp/);
+    const noPref = css.split(/@media \(prefers-reduced-motion: ?no-preference\)/).slice(1).join(' ');
+    expect(noPref).toMatch(/\.stamp[^{]*\{[^}]*animation/);
+    const outside = css.split(/@media \(prefers-reduced-motion: ?no-preference\)\{(?:[^{}]*\{[^}]*\})*[^{}]*\}/).join(' ');
+    expect(outside).not.toMatch(/\.stamp[^{]*\{[^}]*animation:/);
+  });
+  it('links the download cv button', () => {
+    expect(readDist('index.html')).toContain('href="/cv/ArvinRoeslim-CV.pdf"');
+  });
+  it('shows the now strip', () => {
+    const html = readDist('index.html');
+    for (const t of ['Intern at PT Gading Murni', 'Mobile Application &amp; Technology, BINUS', 'Full-time mobile developer roles']) expect(html).toContain(t);
+  });
+});
