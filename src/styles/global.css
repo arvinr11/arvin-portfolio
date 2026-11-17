@@ -1,0 +1,62 @@
+:root {
+  --cobalt: #2350F5;
+  --cobalt-700: #1A3BC2;
+  --sky: #A9D4FF;
+  --tangerine: #FF7A2F;
+  --sun: #FFD447;
+  --mint: #BFEFD8;
+  --paper: #FFF8EC;
+  --ink: #121433;
+  --ink-soft: #474A6B;
+  --white: #FFFFFF;
+  --android: #1B1D24;
+
+  --display: "Archivo Black", system-ui, sans-serif;
+  --text: "Plus Jakarta Sans Variable", "Plus Jakarta Sans", system-ui, sans-serif;
+
+  --pad: clamp(16px, 6.9vw, 100px);
+  --max: 1240px;
+  --shadow-hard: 6px 6px 0 var(--ink);
+  --shadow-button: 0 4px 0 var(--ink);
+  --ease-pop: cubic-bezier(.34, 1.4, .64, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 17px/1.55 var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; height: auto; }
+ul, ol { list-style: none; }
+:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+
+.wrap { max-width: calc(var(--max) + 2 * var(--pad)); margin: 0 auto; padding: 0 var(--pad); }
+.label { font: 700 13px/1.3 var(--text); letter-spacing: .08em; text-transform: uppercase; }
+.display-xl { font: 400 clamp(64px, 10.3vw, 148px)/.88 var(--display); text-transform: uppercase; letter-spacing: -.01em; }
+.display-l { font: 400 clamp(44px, 6.7vw, 96px)/.9 var(--display); text-transform: uppercase; letter-spacing: -.01em; }
+.h-m { font: 400 clamp(30px, 3.4vw, 48px)/1 var(--display); letter-spacing: -.005em; }
+.h-s { font: 800 clamp(22px, 2vw, 28px)/1.15 var(--text); letter-spacing: -.005em; }
+.body-l { font: 500 clamp(18px, 1.5vw, 21px)/1.5 var(--text); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+section { padding: 96px 0; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 24px; margin-bottom: 48px; }
+.sec-head .label { color: var(--ink-soft); }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  section { padding: 64px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
