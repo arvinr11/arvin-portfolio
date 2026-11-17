@@ -33,3 +33,13 @@ describe('work section', () => {
     expect(html).toContain('href="https://github.com/arvinr11"');
   });
 });
+
+describe('github tile', () => {
+  it('uses the shared button so it gets the same hover and press motion', () => {
+    const html = readDist('index.html');
+    const tile = html.match(/<a[^>]*class="more[^"]*"[\s\S]*?<\/a>/)?.[0] ?? '';
+    expect(tile).toMatch(/<span[^>]*class="[^"]*\bbtn\b/);
+    expect(tile).toContain('btn__icon');
+    expect(tile).not.toMatch(/<a\b[\s\S]*<a\b/);
+  });
+});

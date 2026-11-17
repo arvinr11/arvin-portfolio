@@ -7,19 +7,19 @@ interface Props {
   download?: boolean;
   external?: boolean;
   class?: string;
+  /** Render as a span when the button sits inside another link (e.g. a whole card). */
+  as?: 'a' | 'span';
 }
 
-const { href, variant = 'secondary', size = 'md', icon = 'arrow', download = false, external = false, class: extra } = Astro.props;
+const { href, variant = 'secondary', size = 'md', icon = 'arrow', download = false, external = false, class: extra, as = 'a' } = Astro.props;
+const Tag = as;
+const linkAttrs = as === 'a'
+  ? { href, download: download ? '' : undefined, target: external ? '_blank' : undefined, rel: external ? 'noopener' : undefined }
+  : {};
 const iconSize = size === 'sm' ? 18 : 20;
 ---
 
-<a
-  class:list={['btn', `btn--${variant}`, `btn--${size}`, extra]}
-  href={href}
-  download={download ? '' : undefined}
-  target={external ? '_blank' : undefined}
-  rel={external ? 'noopener' : undefined}
->
+<Tag class:list={['btn', `btn--${variant}`, `btn--${size}`, extra]} {...linkAttrs}>
   <slot />
   <span class="btn__icon" aria-hidden="true">
     <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none">
@@ -32,7 +32,7 @@ const iconSize = size === 'sm' ? 18 : 20;
       }
     </svg>
   </span>
-</a>
+</Tag>
 
 <style>
   .btn {
@@ -44,7 +44,8 @@ const iconSize = size === 'sm' ? 18 : 20;
     transition: transform .09s, box-shadow .09s;
   }
   .btn--primary { background: var(--tangerine); }
-  .btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+  .btn:active, :global(a:active) > .btn { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+  :global(a:hover) > .btn .btn__icon { transform: rotate(-45deg); }
   .btn__icon {
     display: grid; place-items: center;
     width: 40px; height: 40px; border-radius: 999px;
